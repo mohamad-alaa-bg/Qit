@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -20,16 +19,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           final user = await loginUseCase(
               LoginParams(email: event.email, password: event.password));
           user.fold((l) {
-            print(l.failure);
-            emit(LoginErrorState());
+            emit(LoginErrorState(error: l.toString()));
           }, (r) {
-            print(r.token);
             emit(LoginSuccessState(userModel: r));
           });
           // user.fold((l) => emit(LoginErrorState()),
           //     (r) => emit(LoginSuccessState(userModel: r)));
         } catch (error) {
-          emit(LoginErrorState());
+          emit(LoginErrorState(error: error.toString()));
         }
       }
     });

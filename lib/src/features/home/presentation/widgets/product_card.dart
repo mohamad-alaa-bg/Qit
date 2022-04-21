@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:qit/src/features/home/data/models/product_model.dart';
 
-import '../../../../core/shared_components/sizedBox.dart';
+import '../../../../core/shared_components/sized_box.dart';
 import 'cart_button.dart';
 
 class ProductCard extends StatelessWidget {
@@ -30,49 +30,48 @@ class ProductCard extends StatelessWidget {
                       topRight: Radius.circular(18),
                       topLeft: Radius.circular(18)),
                 ),
-                // child: Column(
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   children: [
-                //     Container(),
-                //     Container(),
-                //   ],
-                // ),
+
               ),
-              const VerticalSizedBox(height: 17.8),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 150,
-                    padding: const EdgeInsetsDirectional.only(start: 8),
-                    child:  Text(
-                      productModel.title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          fontFamily: 'Palatino',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
+              //const VerticalSizedBox(height: 17.8),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsetsDirectional.only(bottom: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 160,
+                      padding: const EdgeInsetsDirectional.only(start: 8),
+                      child:  Text(
+                        productModel.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            fontFamily: 'Palatino',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      ),
                     ),
-                  ),
-                  Container(
-                    padding:
-                    const EdgeInsetsDirectional.only(start: 9.9),
-                    width: double.infinity,
-                    child:  Text(
-                      '\$${productModel.price}}',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          fontFamily: 'Palatino',
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                    const VerticalSizedBox(height: 2),
+                    Container(
+                      padding:
+                      const EdgeInsetsDirectional.only(start: 9.9),
+                      width: double.infinity,
+                      child:  Text(
+                        '\$ ${productModel.price}',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            fontFamily: 'Palatino',
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               )
             ],
           ),
@@ -143,7 +142,7 @@ class ProductCard extends StatelessWidget {
                 ],
               )),
           //cart button layer
-          CartButton(),
+          const CartButton(),
         ],
       ),
     );

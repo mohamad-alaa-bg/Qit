@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/shared_components/sizedBox.dart';
+import '../../../../core/shared_components/sized_box.dart';
+
 
 class CartButton extends StatelessWidget {
-  GestureTapCallback? onTap;
-   CartButton({Key? key,this.onTap}) : super(key: key);
+  final GestureTapCallback? onTap;
+   const CartButton({Key? key,this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

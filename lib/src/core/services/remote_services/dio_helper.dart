@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:qit/src/core/resources/constants.dart';
-import 'package:qit/src/core/resources/enum.dart';
 
 class DioHelper {
   static Dio? dioLogin;

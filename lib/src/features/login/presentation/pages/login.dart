@@ -1,10 +1,14 @@
+import 'dart:async';
+
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qit/src/core/resources/enum.dart';
 import 'package:qit/src/core/resources/screen_size.dart';
-import 'package:qit/src/core/shared_components/custom_text_form_Field.dart';
+import 'package:qit/src/core/shared_components/custom_text_form_field.dart';
 import 'package:qit/src/core/shared_components/signin_button.dart';
-import 'package:qit/src/core/shared_components/sizedBox.dart';
+import 'package:qit/src/core/shared_components/sized_box.dart';
+import 'package:qit/src/core/utiles/show_toast.dart';
 import 'package:qit/src/injection.dart';
 
 import '../bloc/auth_bloc.dart';
@@ -14,6 +18,7 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     AuthBloc authBloc = sl();
     authBloc = BlocProvider.of(context);
     TextEditingController emailController = TextEditingController();
@@ -21,9 +26,14 @@ class Login extends StatelessWidget {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LoginSuccessState) {
-          Navigator.pushReplacementNamed(context, 'HomeScreen');
+          showToast('Login Successful', true).then((value) => Timer(Duration(milliseconds: 10), (){
+            Navigator.pushReplacementNamed(context, 'HomeScreen');
+          }));
+
           // Navigator.pushReplacement(
           //     context, MaterialPageRoute(builder: (context) => const HomeScreen(),));
+        }else if(state is LoginErrorState){
+          showToast('Invalid Account', false);
         }
       },
       builder: (context, state) {
@@ -76,6 +86,7 @@ class Login extends StatelessWidget {
                               textEditingController: passwordController,
                               suffixIcon: Image.asset(
                                   'assets/images/Icon feather-lock.png'),
+                              obscureText: true,
                             ),
                             const VerticalSizedBox(
                               height: 41,
@@ -100,6 +111,7 @@ class Login extends StatelessWidget {
                                         Colors.black),
                                   ),
                                   onPressed: () {
+                                    FocusScope.of(context).unfocus();
                                     authBloc.add(LoginEvent(
                                       email: emailController.text,
                                       password: passwordController.text,

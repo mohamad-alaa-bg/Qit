@@ -26,7 +26,6 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String str = "";
     return SizedBox(
       height: 50,
       child: TextFormField(

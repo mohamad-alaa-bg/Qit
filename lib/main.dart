@@ -4,7 +4,6 @@ import 'package:qit/src/core/resources/themes.dart';
 import 'package:qit/src/core/services/remote_services/dio_helper.dart';
 import 'package:qit/src/core/utiles/router.dart';
 import 'package:qit/src/features/home/presentation/bloc/home_bloc.dart';
-import 'package:qit/src/features/home/presentation/pages/home.dart';
 import 'package:qit/src/features/login/presentation/bloc/auth_bloc.dart';
 import 'package:qit/src/features/login/presentation/pages/login.dart';
 import 'package:qit/src/injection.dart';

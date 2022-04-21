@@ -22,7 +22,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           final categories = await categoriesUseCase(CategoriesParam());
           categories.fold((l) => emit(CategoriesErrorState()),
               (r) {
-            print(r);
                 emit(CategoriesSuccessState(categories: r));
                 add(GetProductsEvent(categoryName: r[selectedCategories]));
               } );
@@ -36,12 +35,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }else if(event is GetProductsEvent){
         emit(ProductsIsLoadingState());
         try {
-          final products = await categoryUseCases(CategoryParam(categoryName: event.categoryName));
-          products.fold((l) => emit(ProductsErrorState()),
-                  (r) {
-                print(r);
-                emit(ProductsSuccessState(products: r));
-              } );
+          if(allProducts[event.categoryName] == null){
+            final products = await categoryUseCases(CategoryParam(categoryName: event.categoryName));
+            products.fold((l) => emit(ProductsErrorState()),
+                    (r) {
+                  emit(ProductsSuccessState(products: r));
+                  allProducts.addAll({event.categoryName:r});
+                } );
+          }else{
+            emit(ProductsSuccessState(products: allProducts[event.categoryName]! ));
+          }
+
         } catch (error) {
           emit(ProductsErrorState());
         }
@@ -51,4 +55,5 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
    int selectedCategories = 0;
+   Map<String,List<ProductModel>> allProducts = {};
 }

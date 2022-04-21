@@ -1,5 +1,4 @@
 import 'package:fluro/fluro.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:qit/src/features/home/presentation/pages/home.dart';
 import 'package:qit/src/features/login/presentation/pages/login.dart';
 
